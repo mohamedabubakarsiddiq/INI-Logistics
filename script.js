@@ -204,7 +204,7 @@ window.onload = function () {
 
     loadProfile();
 }
-}
+
 
 function updateShipmentStatus(trackingId, status) {
 
