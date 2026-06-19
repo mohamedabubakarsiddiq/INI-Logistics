@@ -202,7 +202,10 @@ function loadShipments() {
                 <td>${shipment.origin}</td>
                 <td>${shipment.destination}</td>
                 <td>${shipment.createdDate}</td>
-                <td>${shipment.status}</td>
+                <td><span class="status ${shipment.status.replace(/\s/g,''0}">
+                                                                  ${shipment.status}
+                                                                  </span>
+                                                                  </td>
                 <td>
                     <button onclick="deleteShipment('${shipment.trackingId}')">
                         Delete
