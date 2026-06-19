@@ -80,32 +80,19 @@ function createShipment() {
 
 function loadDashboardStats() {
 
-    console.log("Dashboard Stats Called");
-
     let shipments =
         JSON.parse(localStorage.getItem("shipments")) || [];
-
-    console.log(shipments);
-
-    console.log("Dashboard function called")
-
-    let shipments = JSON.parse(localStorage.getItem("shipments")) || [];
-
-    console.log("Shipments:', shipments);
-                let total = shipemnts.lenght;
-    console.log("Total:", total);
-
-    console.log("loadDashboardStats executed");
-
-    let shipments =
-        JSON.parse(localStorage.getItem("shipments")) || [];
-
-    console.log(shipments);
 
     let total = shipments.length;
-    let booked = shipments.filter(s => s.status === "Booked").length;
-    let inTransit = shipments.filter(s => s.status === "In Transit").length;
-    let delivered = shipments.filter(s => s.status === "Delivered").length;
+
+    let booked =
+        shipments.filter(s => s.status === "Booked").length;
+
+    let inTransit =
+        shipments.filter(s => s.status === "In Transit").length;
+
+    let delivered =
+        shipments.filter(s => s.status === "Delivered").length;
 
     let totalEl = document.getElementById("totalShipments");
     let bookedEl = document.getElementById("booked");
@@ -116,8 +103,17 @@ function loadDashboardStats() {
     if (bookedEl) bookedEl.innerText = booked;
     if (inTransitEl) inTransitEl.innerText = inTransit;
     if (deliveredEl) deliveredEl.innerText = delivered;
-}
 
+    let analyticsTotal = document.getElementById("analyticsTotal");
+    let analyticsBooked = document.getElementById("analyticsBooked");
+    let analyticsInTransit = document.getElementById("analyticsInTransit");
+    let analyticsDelivered = document.getElementById("analyticsDelivered");
+
+    if (analyticsTotal) analyticsTotal.innerText = total;
+    if (analyticsBooked) analyticsBooked.innerText = booked;
+    if (analyticsInTransit) analyticsInTransit.innerText = inTransit;
+    if (analyticsDelivered) analyticsDelivered.innerText = delivered;
+}
 
 
 function trackShipment() {
@@ -197,7 +193,17 @@ function loadShipments() {
 }
 
 window.onload = function () {
+
+    loadUser();
+
     loadShipments();
+
+    loadDashboardStats();
+
+    loadAnalyticsChart();
+
+    loadProfile();
+}
 }
 
 function updateShipmentStatus(trackingId, status) {
@@ -392,10 +398,7 @@ function updateStatus() {
         loadShipments();
     }
 }
-function logout() {
-    sessionStorage.clear();
 
-    window.location.href = "login.html";
 }
 function searchTracking() {
 
