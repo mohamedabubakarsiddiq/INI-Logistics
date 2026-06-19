@@ -293,23 +293,19 @@ function loadAnalyticsChart() {
 
     if (!chartCanvas) return;
 
-    new Chart(chartCanvas, {
-        type: "pie",
-        data: {
-            labels: [
-                "Booked",
-                "In Transit",
-                "Delivered"
-            ],
-            datasets: [{
-                data: [
-                    booked,
-                    inTransit,
-                    delivered
-                ]
-            }]
-        }
-    });
+   new Chart(chartCanvas, {
+    type: "pie",
+    data: {
+        labels: ["Booked", "In Transit", "Delivered"],
+        datasets: [{
+            data: [booked, inTransit, delivered]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
 }
 function searchShipment() {
 
