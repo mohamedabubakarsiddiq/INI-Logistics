@@ -80,46 +80,25 @@ function createShipment() {
 
 function loadDashboardStats() {
 
-    let total = 0;
-    let booked = 0;
-    let inTransit = 0;
-    let delivered = 0;
+    let shipments =
+        JSON.parse(localStorage.getItem("shipments")) || [];
 
-    for (let i = 0; i < localStorage.length; i++) {
+    let total = shipments.length;
 
-        let key = localStorage.key(i);
+    let booked =
+        shipments.filter(s => s.status === "Booked").length;
 
-        if (key.startsWith("TRK")) {
+    let inTransit =
+        shipments.filter(s => s.status === "In Transit").length;
 
-            let shipment =
-                JSON.parse(localStorage.getItem(key));
+    let delivered =
+        shipments.filter(s => s.status === "Delivered").length;
 
-            total++;
-
-            if (shipment.status === "Booked")
-                booked++;
-
-            if (shipment.status === "In Transit")
-                inTransit++;
-
-            if (shipment.status === "Delivered")
-                delivered++;
-        }
-    }
-
-    if (document.getElementById("totalShipments"))
-        document.getElementById("totalShipments").innerText = total;
-
-    if (document.getElementById("booked"))
-        document.getElementById("booked").innerText = booked;
-
-    if (document.getElementById("inTransit"))
-        document.getElementById("inTransit").innerText = inTransit;
-
-    if (document.getElementById("delivered"))
-        document.getElementById("delivered").innerText = delivered;
+    document.getElementById("totalShipments").innerText = total;
+    document.getElementById("booked").innerText = booked;
+    document.getElementById("inTransit").innerText = inTransit;
+    document.getElementById("delivered").innerText = delivered;
 }
-
 // PAGE LOAD
 
 
@@ -150,8 +129,11 @@ function trackShipment() {
     let trackingId =
         document.getElementById("trackingId").value.trim();
 
+    let shipments =
+        JSON.parse(localStorage.getItem("shipments")) || [];
+
     let shipment =
-        localStorage.getItem(trackingId);
+        shipments.find(s => s.trackingId === trackingId);
 
     let result =
         document.getElementById("trackingResult");
@@ -159,8 +141,6 @@ function trackShipment() {
     if (!result) return;
 
     if (shipment) {
-
-        shipment = JSON.parse(shipment);
 
         result.innerHTML = `
             <h3>Shipment Found</h3>
@@ -178,7 +158,6 @@ function trackShipment() {
             "<p style='color:red'>Tracking ID Not Found</p>";
     }
 }
-
 function loadShipments() {
 
     let shipments =
