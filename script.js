@@ -11,7 +11,7 @@ function login() {
     if(username === "" || password === ""){
 
         document.getElementById("message").innerHTML =
-            "Please enter username and password";
+            "Please enter username and password."
 
         return;
     }
@@ -367,30 +367,29 @@ function updateStatus() {
     let newStatus =
         document.getElementById("newStatus").value;
 
+    let shipments =
+        JSON.parse(localStorage.getItem("shipments")) || [];
+
     let shipment =
-        localStorage.getItem(trackingId);
+        shipments.find(s => s.trackingId === trackingId);
 
     if (!shipment) {
         alert("Tracking ID Not Found");
         return;
     }
 
-    shipment = JSON.parse(shipment);
-
     shipment.status = newStatus;
 
     localStorage.setItem(
-        trackingId,
-        JSON.stringify(shipment)
+        "shipments",
+        JSON.stringify(shipments)
     );
 
     alert("Status Updated Successfully");
 
-    trackShipment(); // refresh display
+    trackShipment();
 
-    if (typeof loadDashboardStats === "function") {
-        loadDashboardStats();
-    }
+    loadDashboardStats();
 
     if (typeof loadShipments === "function") {
         loadShipments();
