@@ -84,43 +84,20 @@ function loadDashboardStats() {
         JSON.parse(localStorage.getItem("shipments")) || [];
 
     let total = shipments.length;
+    let booked = shipments.filter(s => s.status === "Booked").length;
+    let inTransit = shipments.filter(s => s.status === "In Transit").length;
+    let delivered = shipments.filter(s => s.status === "Delivered").length;
 
-    let booked =
-        shipments.filter(s => s.status === "Booked").length;
+    let totalEl = document.getElementById("totalShipments");
+    let bookedEl = document.getElementById("booked");
+    let inTransitEl = document.getElementById("inTransit");
+    let deliveredEl = document.getElementById("delivered");
 
-    let inTransit =
-        shipments.filter(s => s.status === "In Transit").length;
-
-    let delivered =
-        shipments.filter(s => s.status === "Delivered").length;
-
-    document.getElementById("totalShipments").innerText = total;
-    document.getElementById("booked").innerText = booked;
-    document.getElementById("inTransit").innerText = inTransit;
-    document.getElementById("delivered").innerText = delivered;
+    if (totalEl) totalEl.innerText = total;
+    if (bookedEl) bookedEl.innerText = booked;
+    if (inTransitEl) inTransitEl.innerText = inTransit;
+    if (deliveredEl) deliveredEl.innerText = delivered;
 }
-// PAGE LOAD
-
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    if (typeof loadShipments === "function") {
-        loadShipments();
-    }
-
-    if(typeof loadprofile === "function"){
-        loadProfile();
-    }
-
-    if (typeof loadDashboardStats === "function") {
-        loadDashboardStats();
-    }
-
-    if (typeof loadAnalyticsChart === "function") {
-        loadAnalyticsChart();
-    }
-
-});
 
 
 
