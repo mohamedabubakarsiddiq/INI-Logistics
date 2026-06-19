@@ -49,30 +49,32 @@ function createShipment() {
     let trackingId =
         "TRK" + Math.floor(10000 + Math.random() * 90000);
 
-    console.log("Creating Shipment:", trackingId);
+    let shipment = {
+        trackingId: trackingId,
+        sender: document.getElementById("sender").value,
+        receiver: document.getElementById("receiver").value,
+        origin: document.getElementById("origin").value,
+        destination: document.getElementById("destination").value,
+        weight: document.getElementById("weight").value,
+        shipmentType: document.getElementById("ShipmentType").value,
+        status: "Booked",
+        createdDate: new Date().toLocaleDateString()
+    };
 
-   let shipment = {
-    trackingId: trackingId,
-    sender: document.getElementById("sender").value,
-    receiver: document.getElementById("receiver").value,
-    origin: document.getElementById("origin").value,
-    destination: document.getElementById("destination").value,
-    weight: document.getElementById("weight").value,
-    shipmentType: document.getElementById("ShipmentType").value,
-    status: "Booked",
-    createdDate: new Date().toLocaleDateString()
-};
+    let shipments =
+        JSON.parse(localStorage.getItem("shipments")) || [];
+
+    shipments.push(shipment);
 
     localStorage.setItem(
-        trackingId,
-        JSON.stringify(shipment)
+        "shipments",
+        JSON.stringify(shipments)
     );
 
-    console.log("Saved:", localStorage.getItem(trackingId));
-
     alert("Shipment Created Successfully");
-}
 
+    document.querySelector("form").reset();
+}
 
 // DASHBOARD COUNTERS
 
