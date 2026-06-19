@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INI Logistics - Shipment List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+
+        <div class="logo">
+            🚚  INI Logistics
+        </div>
+
+        <div class="menu">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="shipment.html">New Shipment</a>
+            <a href="shipments.html">Shipments</a>
+            <a href="tracking.html">Tracking</a>
+            <a href="profile.html">Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+
+    </div>
+
+    <!-- Shipment List Section -->
+    <div class="table-container">
+
+        <h2>Shipment List</h2>
+<input
+    type="text"
+    id="searchTracking"
+    placeholder="Search byTracking ID"
+    onkeyup="searchShipment()">
+
+    <input
+    type="text"
+    id="searchShipment"
+    placeholder="Search by Sender or Receiver"
+    onkeyup="searchShipment()">
+
+          <button onclick="exportCSV()">
+            Export CSV
+            </button>
+
+        <table id="shipmentTable">
+
+            <thead>
+                <tr>
+                    <th>Tracking ID</th>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Origin</th>
+                    <th>Destination</th>
+                    <th>Create Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    
+                </tr>
+            </thead>
+
+            <tbody id="shipmentBody">
+
+                <tr>
+                    <td colspan="8">
+                        No shipments available
+                    </td>
+                </tr>
+
+            </tbody>
+      
+        </table>
+
+    </div>
+    
+
+<footer>
+    © 2026 INI Logistics |
+    Logistics Management Portal |
+    Developed for Testing Portfolio
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+

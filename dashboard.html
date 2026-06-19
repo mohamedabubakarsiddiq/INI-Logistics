@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>INI Logistics Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">
+            🚚 INI Logistics
+        </div>
+        
+        
+
+        <div class="menu">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="shipment.html">New Shipment</a>
+            <a href="shipments.html">Shipments</a>
+            <a href="tracking.html">Tracking</a>
+            <a href="profile.html">Profile</a>
+            <a href="Logout">Logout</a>
+            <a href="#" onclick="logout()"></a>
+        </div>
+    </div>
+    <button onclick="toggleTheme()">
+            🌙 Dark Mode
+        </button>
+
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <h1>Welcome to INI Logistics Dashboard</h1>
+        <h2 id="WelcomeUser"></h2>
+        <p>Manage and track shipments efficiently</p>
+    </div>
+
+    <!-- Dashboard Cards -->
+
+<div class="dashboard">
+
+    <div class="card">
+    <h3>📦 Total Shipments</h3>
+    <h1 id="totalShipments">0</h1>
+</div>
+
+<div class="card">
+    <h3>📝 Booked</h3>
+    <h1 id="booked">0</h1>
+</div>
+
+<div class="card">
+    <h3>🚚 In Transit</h3>
+    <h1 id="inTransit">0</h1>
+</div>
+
+<div class="card">
+    <h3>✅ Delivered</h3>
+    <h1 id="delivered">0</h1>
+</div>
+
+</div>
+
+<div class="analytics">
+
+    <h2>Shipment Analytics</h2>
+
+    <p>Total Shipments:
+        <span id="analyticsTotal"></span>
+    </p>
+
+    <p>Booked:
+        <span id="analyticsBooked"></span>
+    </p>
+
+    <p>In Transit:
+        <span id="analyticsInTransit"></span>
+    </p>
+
+    <p>Delivered:
+        <span id="analyticsDelivered"></span>
+    </p>
+
+</div>
+
+<div class="analytics-container">
+
+    <h2>Shipment Analytics</h2>
+
+    <div class="chart-card">
+        <canvas id="shipmentPieChart"></canvas>
+    </div>
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+
+
+
+    <!-- Footer -->
+    <footer>
+    © 2026 INI Logistics |
+    Logistics Management Portal |
+    Developed for Testing Portfolio
+</footer>
+
+</body>
+</html>
+

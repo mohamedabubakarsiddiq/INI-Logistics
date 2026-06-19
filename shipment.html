@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Shipment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">INI Logistics</div>
+
+    <div class="menu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="shipment.html">New Shipment</a>
+        <a href="shipments.html">Shipments</a>
+        <a href="tracking.html">Tracking</a>
+        <a href="profile.html">Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+</div>
+
+<div class="form-container">
+
+    <h2>Create New Shipment</h2>
+    <form onsubmit="createShipment(); return false;">
+
+    <input type="text"
+           id="sender"
+           placeholder="Sender Name">
+
+    <input type="text"
+           id="receiver"
+           placeholder="Receiver Name">
+
+    <input type="text"
+           id="origin"
+           placeholder="Origin">
+
+    <input type="text"
+           id="destination"
+           placeholder="Destination">
+    <input type="number"
+              id="weight"
+              placeholder="Weight (kg)">
+
+              <select id="ShipmentType">
+                <option value="Standard">Standard</option>
+                <option value="Express">Express</option>
+                <option value="Same Day">Same Day</option>
+                </select>
+
+    <button onclick="createShipment()">
+        Create Shipment
+    </button>
+    </form>
+
+    
+
+</div>
+
+<script src="script.js"></script>
+
+<footer>
+    © 2026 INI Logistics |
+    Logistics Management Portal |
+    Developed for Testing Portfolio
+</footer>
+
+</body>
+</html>
+

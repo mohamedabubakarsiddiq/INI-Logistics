@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>INI Logistics Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <h1>INI Logistics</h1>
+    <p>Delivering Excellence</p>
+
+    <form onsubmit="login(); return false;">
+
+        <input type="text"
+               id="username"
+               placeholder="Username">
+
+        <input type="password"
+               id="password"
+               placeholder="Password">
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+    <p id="message"></p>
+
+</div>
+
+<footer>
+    © 2026 INI Logistics |
+    Logistics Management Portal |
+    Developed for Testing Portfolio
+</footer>
+
+<script>
+
+function login() {
+
+    let username =
+        document.getElementById("username").value.trim();
+
+    let password =
+        document.getElementById("password").value.trim();
+
+    if(username === "" || password === "") {
+
+        document.getElementById("message").innerHTML =
+            "Please enter Username and Password";
+
+        return;
+    }
+
+    if(username === "admin" &&
+       password === "admin123") {
+
+        sessionStorage.setItem(
+            "username",
+            username
+        );
+
+        window.location.href =
+            "dashboard.html";
+
+    } else {
+
+        document.getElementById("message").innerHTML =
+            "Invalid Username or Password";
+    }
+}
+
+</script>
+
+</body>
+</html>
