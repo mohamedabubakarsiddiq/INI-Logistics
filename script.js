@@ -58,6 +58,12 @@ function createShipment() {
         weight: document.getElementById("weight").value,
         shipmentType: document.getElementById("ShipmentType").value,
         status: "Booked",
+        history: [
+            {
+                status: "Booked",
+                date: new Date().toLocaleString()
+            }
+            ]
         createdDate: new Date().toLocaleDateString()
     };
 
@@ -117,6 +123,21 @@ function loadDashboardStats() {
 
 
 function trackShipment() {
+
+    let historyHTML = "<h3>Shipment History</h3>
+
+    shipment.history.forEach(item=> {
+
+        historyHTML +=`
+        <div class="timeline-item">
+        <strong>${item.status}</strong>
+        <br>
+        <small>${item.date}</small>
+        </div>
+        `;
+        });
+
+    document.getElementById("historyContainer").innerHTML = historyHTML;
 
     let trackingId =
         document.getElementById("trackingId").value.trim();
@@ -382,6 +403,11 @@ function updateStatus() {
     }
 
     shipment.status = newStatus;
+
+    shipment.history.push({
+        status: newStatus,
+        date: new Date().toLoacaleString()
+    });
 
     localStorage.setItem(
         "shipments",
