@@ -49,22 +49,25 @@ function createShipment() {
     let trackingId =
         "TRK" + Math.floor(10000 + Math.random() * 90000);
 
-    let shipment = {
-        trackingId: trackingId,
-        sender: document.getElementById("sender").value,
-        receiver: document.getElementById("receiver").value,
-        origin: document.getElementById("origin").value,
-        destination: document.getElementById("destination").value,
-        weight: document.getElementById("weight").value,
-        shipmentType: document.getElementById("ShipmentType").value,
-        status: "Booked",
-        history: [
-            {
-                status: "Booked",
-                date: new Date().toLocaleString()
-            }
-            ],
-        createdDate: new Date().toLocaleDateString()
+   let shipment = {
+    trackingId: trackingId,
+    sender: document.getElementById("sender").value,
+    receiver: document.getElementById("receiver").value,
+    origin: document.getElementById("origin").value,
+    destination: document.getElementById("destination").value,
+    weight: document.getElementById("weight").value,
+    shipmentType: document.getElementById("ShipmentType").value,
+    status: "Booked",
+
+    history: [
+        {
+            status: "Booked",
+            date: new Date().toLocaleString()
+        }
+    ],
+
+    createdDate: new Date().toLocaleDateString()
+};
     
 
     let shipments =
@@ -122,23 +125,7 @@ function loadDashboardStats() {
 }
 
 
-function trackShipment() 
-if (shipment) {
-
-    let historyHTML = "<h3>Shipment History</h3>
-
-    shipment.history.forEach(item=> {
-
-        historyHTML +=`
-        <div class="timeline-item">
-        <strong>${item.status}</strong>
-        <br>
-        <small>${item.date}</small>
-        </div>
-        `;
-        });
-
-    document.getElementById("historyContainer").innerHTML = historyHTML;
+function trackShipment() {
 
     let trackingId =
         document.getElementById("trackingId").value.trim();
@@ -165,6 +152,23 @@ if (shipment) {
             <p><b>Destination:</b> ${shipment.destination}</p>
             <p><b>Status:</b> ${shipment.status}</p>
         `;
+
+        let historyHTML =
+            "<h3>Shipment History</h3>";
+
+        shipment.history.forEach(item => {
+
+            historyHTML += `
+                <div class="timeline-item">
+                    <strong>${item.status}</strong>
+                    <br>
+                    <small>${item.date}</small>
+                </div>
+            `;
+        });
+
+        document.getElementById("historyContainer").innerHTML =
+            historyHTML;
 
     } else {
 
