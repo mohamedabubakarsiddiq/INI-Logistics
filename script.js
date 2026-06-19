@@ -80,8 +80,12 @@ function createShipment() {
 
 function loadDashboardStats() {
 
+    console.log("loadDashboardStats executed");
+
     let shipments =
         JSON.parse(localStorage.getItem("shipments")) || [];
+
+    console.log(shipments);
 
     let total = shipments.length;
     let booked = shipments.filter(s => s.status === "Booked").length;
