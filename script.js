@@ -80,6 +80,14 @@ function createShipment() {
 
 function loadDashboardStats() {
 
+    console.log("Dashboard function called")
+
+    let shipments = JSON.parse(localStorage.getItem("shipments")) || [];
+
+    console.log("Shipments:', shipments);
+                let total = shipemnts.lenght;
+    console.log("Total:", total);
+
     console.log("loadDashboardStats executed");
 
     let shipments =
