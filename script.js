@@ -445,3 +445,10 @@ function updateStatus() {
         loadShipments();
     }
 }
+function logout() {
+    localStorage.clear();
+
+    alert("Logged out successfully!");
+
+    window.location.href = "login.html";
+}
