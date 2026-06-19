@@ -399,7 +399,6 @@ function updateStatus() {
     }
 }
 
-}
 function searchTracking() {
 
     let filter =
