@@ -181,6 +181,9 @@ function trackShipment() {
 
 function loadShipments() {
 
+    let shipments =
+        JSON.parse(localStorage.getItem("shipments")) || [];
+
     let tableBody =
         document.getElementById("shipmentBody");
 
@@ -188,52 +191,38 @@ function loadShipments() {
 
     tableBody.innerHTML = "";
 
-    for (let i = 0; i < localStorage.length; i++) {
-
-        let key = localStorage.key(i);
-
-        if (key.startsWith("TRK")) {
-
-            let shipment =
-                JSON.parse(localStorage.getItem(key));
-
-            tableBody.innerHTML += `
-                <tr>
-                    <td>${shipment.trackingId}</td>
-                    <td>${shipment.sender}</td>
-                    <td>${shipment.receiver}</td>
-                    <td>${shipment.origin}</td>
-                    <td>${shipment.destination}</td>
-                    <td>${shipment.createdDate}</td>
-
-                    <td>
-                        <select onchange="updateShipmentStatus('${shipment.trackingId}', this.value)">
-                            <option value="Booked"
-                                ${shipment.status === "Booked" ? "selected" : ""}>
-                                Booked
-                            </option>
-
-                            <option value="In Transit"
-                                ${shipment.status === "In Transit" ? "selected" : ""}>
-                                In Transit
-                            </option>
-
-                            <option value="Delivered"
-                                ${shipment.status === "Delivered" ? "selected" : ""}>
-                                Delivered
-                            </option>
-                        </select>
-                    </td>
-
-                    <td>
-                        <button onclick="deleteShipment('${shipment.trackingId}')">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-            `;
-        }
+    if (shipments.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="8">No shipments available</td>
+            </tr>
+        `;
+        return;
     }
+
+    shipments.forEach(shipment => {
+
+        tableBody.innerHTML += `
+            <tr>
+                <td>${shipment.trackingId}</td>
+                <td>${shipment.sender}</td>
+                <td>${shipment.receiver}</td>
+                <td>${shipment.origin}</td>
+                <td>${shipment.destination}</td>
+                <td>${shipment.createdDate}</td>
+                <td>${shipment.status}</td>
+                <td>
+                    <button onclick="deleteShipment('${shipment.trackingId}')">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+window.onload = function () {
+    loadshipments();
 }
 
 function updateShipmentStatus(trackingId, status) {
@@ -254,15 +243,21 @@ function updateShipmentStatus(trackingId, status) {
     loadDashboardStats();
 }
 
-function deleteShipment(trackingId){
+function deleteShipment(trackingId) {
 
-    if(confirm("Are you sure you want to delete?")){
+    let shipments =
+        JSON.parse(localStorage.getItem("shipments")) || [];
 
-        localStorage.removeItem(trackingId);
+    shipments = shipments.filter(
+        shipment => shipment.trackingId !== trackingId
+    );
 
-        loadShipments();
-        loadDashboardStats();
-    }
+    localStorage.setItem(
+        "shipments",
+        JSON.stringify(shipments)
+    );
+
+    loadShipments();
 }
 
 function loadAnalyticsChart() {
