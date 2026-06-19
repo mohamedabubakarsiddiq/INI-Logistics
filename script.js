@@ -222,7 +222,7 @@ function loadShipments() {
 }
 
 window.onload = function () {
-    loadshipments();
+    loadShipments();
 }
 
 function updateShipmentStatus(trackingId, status) {
@@ -351,9 +351,7 @@ function loadUser() {
             "Welcome, " + user;
     }
 }
-function toggleTheme() {
-    document.body.classList.toggle("dark-mode");    
-}
+
 function exportCSV(){
 
     let csv =
@@ -446,7 +444,4 @@ function logout() {
     localStorage.clear();
 
     window.location.href = "login.html";
-}
-function createShipment(event){
-    event.preventDefault();
 }
