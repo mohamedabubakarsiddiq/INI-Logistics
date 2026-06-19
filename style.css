@@ -359,3 +359,21 @@ footer{
 .profile-container{
     min-height:70vh;
 }
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.Booked {
+    background: #2196F3;
+}
+
+.InTransit {
+    background: #ff9800;
+}
+
+.Delivered {
+    background: #4CAF50;
+}
