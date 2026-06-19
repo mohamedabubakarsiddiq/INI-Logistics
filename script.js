@@ -218,34 +218,22 @@ function deleteShipment(trackingId) {
 
 function loadAnalyticsChart() {
 
-    let booked = 0;
-    let inTransit = 0;
-    let delivered = 0;
+    let shipments =
+        JSON.parse(localStorage.getItem("shipments")) || [];
 
-    for(let i=0; i<localStorage.length; i++){
+    let booked =
+        shipments.filter(s => s.status === "Booked").length;
 
-        let key = localStorage.key(i);
+    let inTransit =
+        shipments.filter(s => s.status === "In Transit").length;
 
-        if(key.startsWith("TRK")){
-
-            let shipment =
-                JSON.parse(localStorage.getItem(key));
-
-            if(shipment.status === "Booked")
-                booked++;
-
-            if(shipment.status === "In Transit")
-                inTransit++;
-
-            if(shipment.status === "Delivered")
-                delivered++;
-        }
-    }
+    let delivered =
+        shipments.filter(s => s.status === "Delivered").length;
 
     let chartCanvas =
-        document.getElementById("shipmentChart");
+        document.getElementById("shipmentPieChart");
 
-    if(!chartCanvas) return;
+    if (!chartCanvas) return;
 
     new Chart(chartCanvas, {
         type: "pie",
@@ -256,7 +244,6 @@ function loadAnalyticsChart() {
                 "Delivered"
             ],
             datasets: [{
-                label: "Shipment Count",
                 data: [
                     booked,
                     inTransit,
@@ -308,32 +295,23 @@ function loadUser() {
     }
 }
 
-function exportCSV(){
+function exportCSV() {
+
+    let shipments =
+        JSON.parse(localStorage.getItem("shipments")) || [];
 
     let csv =
         "TrackingID, Sender, Receiver, Origin, Destination, Status\n";
 
-    for(let i=0;i<localStorage.length;i++){
+    shipments.forEach(shipment => {
 
-        let key = localStorage.key(i);
+        csv +=
+            `${shipment.trackingId},${shipment.sender},${shipment.receiver},${shipment.origin},${shipment.destination},${shipment.status}\n`;
 
-        if(key.startsWith("TRK")){
-
-            let shipment =
-                JSON.parse(localStorage.getItem(key));
-
-            csv +=
-            `${shipment.trackingId},
-            ${shipment.sender},
-            ${shipment.receiver},
-            ${shipment.origin},
-            ${shipment.destination},
-            ${shipment.status}\n`;
-        }
-    }
+    });
 
     let blob =
-        new Blob([csv], {type:"text/csv"});
+        new Blob([csv], { type: "text/csv" });
 
     let link =
         document.createElement("a");
@@ -399,4 +377,25 @@ function logout() {
     sessionStorage.clear();
 
     window.location.href = "login.html";
+}
+function searchTracking() {
+
+    let filter =
+        document.getElementById("searchTracking")
+        .value
+        .toUpperCase();
+
+    let rows =
+        document.querySelectorAll("#shipmentBody tr");
+
+    rows.forEach(row => {
+
+        let trackingId =
+            row.cells[0].innerText.toUpperCase();
+
+        row.style.display =
+            trackingId.includes(filter)
+                ? ""
+                : "none";
+    });
 }
