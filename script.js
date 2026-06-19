@@ -63,9 +63,9 @@ function createShipment() {
                 status: "Booked",
                 date: new Date().toLocaleString()
             }
-            ]
+            ],
         createdDate: new Date().toLocaleDateString()
-    };
+    
 
     let shipments =
         JSON.parse(localStorage.getItem("shipments")) || [];
@@ -122,7 +122,8 @@ function loadDashboardStats() {
 }
 
 
-function trackShipment() {
+function trackShipment() 
+if (shipment) {
 
     let historyHTML = "<h3>Shipment History</h3>
 
@@ -202,10 +203,11 @@ function loadShipments() {
                 <td>${shipment.origin}</td>
                 <td>${shipment.destination}</td>
                 <td>${shipment.createdDate}</td>
-                <td><span class="status ${shipment.status.replace(/\s/g,''0}">
-                                                                  ${shipment.status}
-                                                                  </span>
-                                                                  </td>
+                <td>
+                <span class="status ${shipment.status.replace(/\s/g,'')}">
+                ${shipment.status}
+                </span>
+                </td>
                 <td>
                     <button onclick="deleteShipment('${shipment.trackingId}')">
                         Delete
@@ -232,16 +234,19 @@ window.onload = function () {
 
 function updateShipmentStatus(trackingId, status) {
 
-    let shipment =
-        JSON.parse(localStorage.getItem(trackingId));
+    let shipments =
+        JSON.parse(localStorage.getItem("shipments")) || [];
 
-    if (!shipment) return;
+    let shipment =
+        shipments.find(s => s.trackingId === trackingId);
+
+    if(!shipment) return;
 
     shipment.status = status;
 
     localStorage.setItem(
-        trackingId,
-        JSON.stringify(shipment)
+        "shipments",
+        JSON.stringify(shipments)
     );
 
     loadShipments();
@@ -409,7 +414,7 @@ function updateStatus() {
 
     shipment.history.push({
         status: newStatus,
-        date: new Date().toLoacaleString()
+        date: new Date().toLocaleString()
     });
 
     localStorage.setItem(
