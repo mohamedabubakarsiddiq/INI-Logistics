@@ -377,3 +377,13 @@ footer{
 .Delivered {
     background: #4CAF50;
 }
+.chart-card {
+    width: 250px;
+    height: 250px;
+    margin: auto;
+}
+
+#shipmentPieChart {
+    width: 100% !important;
+    height: 100% !important;
+}
