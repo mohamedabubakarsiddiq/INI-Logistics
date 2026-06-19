@@ -80,6 +80,13 @@ function createShipment() {
 
 function loadDashboardStats() {
 
+    console.log("Dashboard Stats Called");
+
+    let shipments =
+        JSON.parse(localStorage.getItem("shipments")) || [];
+
+    console.log(shipments);
+
     console.log("Dashboard function called")
 
     let shipments = JSON.parse(localStorage.getItem("shipments")) || [];
