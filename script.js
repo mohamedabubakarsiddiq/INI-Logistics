@@ -360,7 +360,7 @@ function toggleTheme() {
 function exportCSV(){
 
     let csv =
-        "TrackingID,Sender,Receiver,Origin,Destination,Status\n";
+        "TrackingID, Sender, Receiver, Origin, Destination, Status\n";
 
     for(let i=0;i<localStorage.length;i++){
 
@@ -449,4 +449,7 @@ function logout() {
     localStorage.clear();
 
     window.location.href = "login.html";
+}
+function createShipment(event){
+    event.preventDefault();
 }
